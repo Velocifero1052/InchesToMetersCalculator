@@ -36,15 +36,24 @@ public class MainActivity extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        double inch_ = Double.parseDouble(inches.getText().toString());
-                        double res = calculateMeters(inch_);
-                        displayResult(res);
+                        String inchesString = inches.getText().toString();
+                        if (inchesString.isEmpty()) {
+                            displayHint();
+                        } else {
+                            double inch_ = Double.parseDouble(inches.getText().toString());
+                            double res = calculateMeters(inch_);
+                            displayResult(res);
+                        }
                     }
                 });
     }
 
     private double calculateMeters(double inches_) {
         return inches_ * 0.0254;
+    }
+
+    private void displayHint() {
+        resultText.setText("Please enter the inches value in ##.## format");
     }
 
     private void displayResult(double res) {
